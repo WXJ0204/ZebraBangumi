@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="ZebraBangumi.Slide2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZebraBangumi"
+             xmlns:mex="clr-namespace:MetroExtras"
+             xmlns:exConverts="clr-namespace:MetroExtras.Converters"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1074"
+             mex:MetroExtraColor.MainBrush="Green">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="TransitionsUseOnly.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="lvc:RowSeries">
+                <Setter Property="MaxRowHeigth" Value="60"/>
+                <Setter Property="RowPadding" Value="20"/>
+                <Setter Property="DataLabels" Value="True"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Name="root" Height="600" Width="1074">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+            <RowDefinition MaxHeight="105"/>
+        </Grid.RowDefinitions>
+
+        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft, Duration=0:0:0.5}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+            <local:TimeSelectBlock x:Name="timeSelect"
+                                   mex:MetroExtraColor.MainBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.MainBrush)}"
+                                   TimeChanged="TimeSelect_TimeChanged"
+                                   Margin="30,20,30,15"/>
+        </materialDesign:TransitioningContent>
+        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft, Duration=0:0:0.5}" Grid.Column="0" Grid.Row="2">
+        <ToggleButton Name="btnSaveForm"
+                      Margin="30,15,30,30" 
+                      Style="{StaticResource SaveFromBtn}"/>
+        </materialDesign:TransitioningContent>
+        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromRight, Duration=0:0:0.5}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+        <local:AddableSelectBlock x:Name="detailSelect"
+                                  DoSearch="DetailSelect_DoSearch"
+                                  TypeChanged="DetailSelect_TypeChanged"
+                                  RangeTypeChanged="DetailSelect_RangeTypeChanged"
+                                  ItemCanceled="DetailSelect_ItemCanceled"
+                                  mex:MetroExtraColor.MainBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.MainBrush)}"
+                                  Margin="0,20,30,20"/>
+        </materialDesign:TransitioningContent>
+        <Border Name="brdChart" Grid.Column="1" Margin="0,20,30,20">
+            <DockPanel Name="pChart" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <TextBlock Name="chartTitle" Text="Null" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="5" FontSize="16" FontWeight="Bold"
+                           Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.MainBrush), Converter={x:Static exConverts:ExColorConverter.Dark}, ConverterParameter=0;0.3}"/>
+
+                <lvc:CartesianChart Name="chart" LegendLocation="Right"
+                                Series="{Binding SeriesCollection}">
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="" Labels="-"/>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

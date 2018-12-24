@@ -1,0 +1,247 @@
+﻿ <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MetroExtras"
+                    xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+                    xmlns:exConverters="clr-namespace:MetroExtras.Converters">
+    <Style x:Key="ExBorderMetroToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="mdt:RippleAssist.Feedback" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush)}" />
+        <Setter Property="Foreground" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush)}" />
+        <Setter Property="BorderBrush" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush)}"/>
+        <Setter Property="Padding" Value="10 5 10 5" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="mdt:ShadowAssist.ShadowDepth" Value="Depth1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid Opacity="0.85">
+                        <Border x:Name="border"
+                                Margin="0"
+                                CornerRadius="{Binding RelativeSource={x:Static RelativeSource.TemplatedParent}, Path=(local:MetroExtraBorderAssist.BorderCornerRadius)}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mdt:ShadowAssist.ShadowDepth), Converter={x:Static converters:ShadowConverter.Instance}}">
+                        </Border>
+                        <Grid Name="cutter" 
+                              Width="{Binding ElementName=border, Path=ActualWidth}"
+                              Height="{Binding ElementName=border, Path=ActualHeight}">
+                            <Grid.Clip>
+                                <MultiBinding Converter="{x:Static exConverters:RectangleClipConverter.Instance}">
+                                    <Binding ElementName="cutter" Path="ActualWidth" Mode="OneWay"/>
+                                    <Binding ElementName="cutter" Path="ActualHeight" Mode="OneWay"/>
+                                    <Binding ElementName="border" Path="CornerRadius" Mode="OneWay" Converter="{x:Static exConverters:CornerRadiusConvert.GetCornerValue}" ConverterParameter="TopLeft"/>
+                                </MultiBinding>
+                            </Grid.Clip>
+                            <Ellipse x:Name="drawer"
+                                     Height="{Binding Mode=OneWay, RelativeSource={RelativeSource Mode=Self}, Path=Width}"
+                                     Fill="{TemplateBinding BorderBrush}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center">
+                                <Ellipse.Width>
+                                    <MultiBinding Converter="{x:Static exConverters:EuclideanDistanceConvert.Instance}">
+                                        <Binding Mode="OneWay" ElementName="border" Path="ActualWidth"/>
+                                        <Binding Mode="OneWay" ElementName="border" Path="ActualHeight"/>
+                                    </MultiBinding>
+                                </Ellipse.Width>
+                                <Ellipse.LayoutTransform>
+                                    <ScaleTransform x:Name="bigger" 
+                                                    CenterX="{Binding ElementName=drawer, Path=Width, Converter={x:Static exConverters:ExCommanConverter.Instance}, ConverterParameter=0.5}" 
+                                                    CenterY="{Binding RelativeSource={RelativeSource Mode=Self}, Path=CenterX}" 
+                                                    ScaleX="0" ScaleY="0"/>
+                                </Ellipse.LayoutTransform>
+                            </Ellipse>
+                        </Grid>
+                        <mdt:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"     
+                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Padding="{TemplateBinding Padding}" 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <mdt:Ripple.Clip>
+                                <MultiBinding Converter="{x:Static exConverters:RectangleClipConverter.Instance}">
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}" Path="ActualWidth" Mode="OneWay"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}" Path="ActualHeight" Mode="OneWay"/>
+                                    <Binding ElementName="border" Path="CornerRadius" Mode="OneWay" Converter="{x:Static exConverters:CornerRadiusConvert.GetCornerValue}" ConverterParameter="TopLeft"/>
+                                </MultiBinding>
+                            </mdt:Ripple.Clip>
+                        </mdt:Ripple>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="Light">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.5" To="Normal">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CircleEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.5" To="MouseOver">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CircleEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState Name="Normal"/>
+                                <VisualState Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup Name="Draw">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" From="Unchecked" To="Checked">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CircleEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.2"
+                                                         Storyboard.TargetName="bigger"
+                                                         Storyboard.TargetProperty="ScaleX"
+                                                         To="1" />
+                                            <DoubleAnimation Duration="0:0:0.2"
+                                                         Storyboard.TargetName="bigger"
+                                                         Storyboard.TargetProperty="ScaleY"
+                                                         To="1" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" From="Checked" To="Unchecked">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CircleEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.2"
+                                                         Storyboard.TargetName="bigger"
+                                                         Storyboard.TargetProperty="ScaleX"
+                                                         To="0" />
+                                            <DoubleAnimation Duration="0:0:0.2"
+                                                         Storyboard.TargetName="bigger"
+                                                         Storyboard.TargetProperty="ScaleY"
+                                                         To="0" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState Name="Unchecked">
+                                </VisualState>
+                                <VisualState Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="bigger"
+                                                         Storyboard.TargetProperty="ScaleX"
+                                                         To="1" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="bigger"
+                                                         Storyboard.TargetProperty="ScaleY"
+                                                         To="1" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <!--<Setter Property="Background" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush)}" />-->
+                            <Setter Property="Foreground" Value="White" />
+                            <!--<Setter Property="BorderThickness" Value="0" />-->
+                            <Setter Property="mdt:RippleAssist.Feedback" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="mdt:ShadowAssist.Darken" Value="True" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ExDoubleHalfCycleBorderMetroToggleButton" TargetType="ToggleButton" BasedOn="{StaticResource ExBorderMetroToggleButton}">
+        <Setter Property="local:MetroExtraBorderAssist.BorderCornerRadius" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ActualHeight, Converter={x:Static exConverters:CornerRadiusConvert.Instance}, ConverterParameter=0.5}"/>
+    </Style>
+
+    <Style x:Key="ExTabButton" TargetType="Button">
+        <Setter Property="Background" Value="Blue"/>
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Width" Value="160"/>
+        <Setter Property="local:MetroExtraColor.MainBrush" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Background}"/>
+        <Setter Property="local:MetroExtraColor.LightBrush" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush), Converter={x:Static exConverters:ExColorConverter.Light}, ConverterParameter= 0; 0.7}"/>
+        <Setter Property="local:MetroExtraColor.DarkBrush" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush), Converter={x:Static exConverters:ExColorConverter.Dark}}"/>
+        <Setter Property="FontSize" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Height, Converter={x:Static exConverters:ExCommanConverter.Instance}, ConverterParameter=0.35}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush)}"/>
+        <Setter Property="local:MetroExtraBorderAssist.BorderCornerRadius" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Height, Converter={x:Static exConverters:CornerRadiusConvert.Instance}, ConverterParameter=0.25}"/>
+        <Setter Property="mdt:RippleAssist.Feedback" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(local:MetroExtraColor.MainBrush)}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="showingField"
+                          Height="{Binding Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height}"
+                          Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width}"
+                          MinHeight="{TemplateBinding Property=Height}"
+                          MinWidth="{TemplateBinding Property=Width}"
+                          MaxHeight="{TemplateBinding Property=Height, Converter={x:Static exConverters:ExCommanConverter.Instance},ConverterParameter=1.25}"
+                          MaxWidth="{TemplateBinding Property=Width, Converter={x:Static exConverters:ExCommanConverter.Instance},ConverterParameter=1.25}">
+                        <Border x:Name="border"
+                                CornerRadius="{TemplateBinding local:MetroExtraBorderAssist.BorderCornerRadius}" 
+                                BorderBrush="{TemplateBinding local:MetroExtraColor.MainBrush}" 
+                                BorderThickness="2" 
+                                Width="{TemplateBinding Width, Converter={x:Static exConverters:ExCommanConverter.Instance}, ConverterParameter=1.3}"
+                                Background="{TemplateBinding local:MetroExtraColor.LightBrush}">
+                        </Border>
+                        <Border x:Name="light"
+                                CornerRadius="{TemplateBinding local:MetroExtraBorderAssist.BorderCornerRadius}" 
+                                BorderBrush="{TemplateBinding local:MetroExtraColor.MainBrush}" 
+                                BorderThickness="2" 
+                                Width="{TemplateBinding Width, Converter={x:Static exConverters:ExCommanConverter.Instance}, ConverterParameter=1.3}"
+                                Opacity="0">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.8,1" StartPoint="0.2,0">
+                                    <GradientStop Offset="1"/>
+                                    <GradientStop Color="White"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <local:ExRipple ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"     
+                                        ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Padding="{TemplateBinding Padding}" 
+                                        Width="{TemplateBinding Width, Converter={x:Static exConverters:ExCommanConverter.Instance}, ConverterParameter=1.3}"
+                                        CornerRadius="{TemplateBinding local:MetroExtraBorderAssist.BorderCornerRadius}"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="{TemplateBinding Width}"/>
+                        </local:ExRipple>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="Light">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.5" To="Normal">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CircleEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.5" To="MouseOver">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CircleEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState Name="Normal"/>
+                                <VisualState Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:1"
+                                                         Storyboard.TargetName="light"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0.5" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

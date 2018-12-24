@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="ZebraBangumi.PeriodSelectBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZebraBangumi"
+             xmlns:mex="clr-namespace:MetroExtras"
+             xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+             xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:exConvert="clr-namespace:MetroExtras.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="770"
+             mex:MetroExtraColor.MainBrush="Violet"
+             mex:MetroExtraColor.LightBrush="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(mex:MetroExtraColor.MainBrush), Converter={x:Static exConvert:ExColorConverter.Light}, ConverterParameter=0.7}">
+    <UIElement.CacheMode>
+        <BitmapCache RenderAtScale="1" EnableClearType="False" SnapsToDevicePixels="False"/>
+    </UIElement.CacheMode>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="BlockControlUseOnly.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Height="60">
+        <Border x:Name="back"
+                Background="Black"
+                Opacity="0.6"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="10,0,0,0">
+            <TextBlock Text="起始时间" FontSize="24" Style="{StaticResource TextBlock}" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox Name="cbStartYear" Style="{StaticResource ComboBox}" Width="120" VerticalAlignment="Stretch" Margin="5,10,5,10" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="2018"/>
+                <ComboBoxItem Content="2017"/>
+                <ComboBoxItem Content="2016"/>
+                <ComboBoxItem Content="2015"/>
+                <ComboBoxItem Content="2014"/>
+                <ComboBoxItem Content="2013"/>
+                <ComboBoxItem Content="2012"/>
+                <ComboBoxItem Content="2011"/>
+                <ComboBoxItem Content="2010" IsSelected="True"/>
+            </ComboBox>
+            <ComboBox Name="cbStartSeason" Style="{StaticResource ComboBox}" Width="120" VerticalAlignment="Stretch" Margin="5,10,5,10" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="全年" IsSelected="True"/>
+                <ComboBoxItem Content="冬季"/>
+                <ComboBoxItem Content="春季"/>
+                <ComboBoxItem Content="夏季"/>
+                <ComboBoxItem Content="秋季"/>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0,0,10,0">
+            <TextBlock Text="结束时间" FontSize="24" Style="{StaticResource TextBlock}" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox Name="cbEndYear" Style="{StaticResource ComboBox}" Width="120" VerticalAlignment="Stretch" Margin="5,10,5,10" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="2018" IsSelected="True"/>
+                <ComboBoxItem Content="2017"/>
+                <ComboBoxItem Content="2016"/>
+                <ComboBoxItem Content="2015"/>
+                <ComboBoxItem Content="2014"/>
+                <ComboBoxItem Content="2013"/>
+                <ComboBoxItem Content="2012"/>
+                <ComboBoxItem Content="2011"/>
+                <ComboBoxItem Content="2010"/>
+            </ComboBox>
+            <ComboBox Name="cbEndSeason" Style="{StaticResource ComboBox}" Width="120" VerticalAlignment="Stretch" Margin="5,10,5,10" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="全年" IsSelected="True"/>
+                <ComboBoxItem Content="冬季"/>
+                <ComboBoxItem Content="春季"/>
+                <ComboBoxItem Content="夏季"/>
+                <ComboBoxItem Content="秋季"/>
+            </ComboBox>
+        </StackPanel>
+        <Rectangle Name="lockBlock" Fill="White" Opacity="0" Visibility="Hidden"/>
+    </Grid>
+</UserControl>

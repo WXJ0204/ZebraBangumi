@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="ZebraBangumi.Slide6"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZebraBangumi"
+             xmlns:mex="clr-namespace:MetroExtras"
+             xmlns:exConverts="clr-namespace:MetroExtras.Converters"
+             xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+             xmlns:Properties="clr-namespace:ZebraBangumi.Properties"
+             xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             mex:MetroExtraColor.MainBrush="Violet"
+             mex:MetroExtraColor.DarkBrush="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(mex:MetroExtraColor.MainBrush), Converter={x:Static exConverts:ExColorConverter.Dark}, ConverterParameter=0;0.2}"
+             mex:MetroExtraColor.LightBrush="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(mex:MetroExtraColor.MainBrush), Converter={x:Static exConverts:ExColorConverter.Light}, ConverterParameter=0;0.4}"
+             d:DesignHeight="600" d:DesignWidth="1074">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="TransitionsUseOnly.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.Buttons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.MainBrush)}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=BorderBrush}"/>
+                <Setter Property="Background" Value="{x:Null}"/>
+                <Setter Property="Padding" Value="0"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.LightBrush)}"/>
+                        <Setter Property="Background" Value="{x:Null}"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.DarkBrush)}"/>
+                        <Setter Property="Background" Value="{x:Null}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="28"/>
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.DarkBrush)}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="mdt:ShadowAssist.ShadowDepth" Value="Depth1" />
+                <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(mdt:ShadowAssist.ShadowDepth), Converter={x:Static converters:ShadowConverter.Instance}}"/>
+                <Setter Property="mdt:ShadowAssist.Darken" Value="False"/>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=(mex:MetroExtraColor.MainBrush)}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Name="root" Height="600" Width="1074">
+        <StackPanel Name="settings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,40,0,0">
+            <Label Content="设置" Margin="0,0,0,10"/>
+            <TextBlock Text="图表保存放缩倍率（倍率过高可能导致软件运行明显卡顿）" FontSize="18" Margin="40,2"/>
+            <Slider Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                    ToolTip="MaterialDesignDiscreteSlider"
+                    Margin="40,2" 
+                    Orientation="Horizontal" Minimum="1" Maximum="8" Value="{Binding  Path=PictureSaveMagnification,Source={x:Static Properties:Settings.Default}}"/>
+        </StackPanel>
+        <StackPanel Margin="80,280,40,40" HorizontalAlignment="Stretch">
+            <Label Content="关于" Margin="0,0,0,5"/>
+            <TextBlock Text="软件名称：ZebraBangumi" Margin="40,2" HorizontalAlignment="Left"/>
+            <TextBlock Text="开发团队：2018 Black Leo STAFF™" Margin="40,2,40,20" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="40,2" HorizontalAlignment="Left">
+                <TextBlock Text="当前软件版本："/>
+                <TextBlock Text="{Binding Path=SoftwareVersion,Source={x:Static Properties:Settings.Default}}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="40,2" HorizontalAlignment="Left">
+                <TextBlock Text="当前数据库版本："/>
+                <TextBlock Text="{Binding Path=DatabaseVersion,Source={x:Static Properties:Settings.Default}}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="40,2,40,20"  HorizontalAlignment="Left">
+                <TextBlock Name="txbDatabaseHasUpdate" Text="数据库有更新"/>
+                <Button x:Name="btnDbUpdate" Content="更新数据库" Click="BtnDbUpdate_Click" Margin="30,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="Visible" Margin="40,2" HorizontalAlignment="Left">
+                <TextBlock Text="许可证："/>
+                <TextBlock Name="txbAccess" Text="未激活"/>
+                <Button x:Name="btnRegister" Content="产品激活" Click="BtnRegister_Click" Margin="30,0"/>
+            </StackPanel>
+            <StackPanel Name="seriesCode" Orientation="Horizontal" Visibility="Visible" Margin="40,2" HorizontalAlignment="Left">
+                <TextBlock Text="产品密钥："/>
+                <TextBlock Text="{Binding Path=Series,Source={x:Static Properties:Settings.Default}}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

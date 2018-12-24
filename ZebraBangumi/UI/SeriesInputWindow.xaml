@@ -1,0 +1,71 @@
+﻿<Controls:MetroWindow x:Class="ZebraBangumi.SeriesInputWindow"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls" 
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:local="clr-namespace:ZebraBangumi"
+                      mc:Ignorable="d"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Title="产品注册" 
+                      ResizeMode="NoResize"
+                      WindowStartupLocation="CenterScreen"
+                      Height="600" Width="700">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button" BasedOn="{StaticResource AccentedSquareButtonStyle}"/>
+            <Style TargetType="materialDesign:TransitionerSlide">
+                <Setter Property="OpeningEffect">
+                    <Setter.Value>
+                        <materialDesign:TransitionEffect Kind="ExpandIn"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ForwardWipe">
+                    <Setter.Value>
+                        <materialDesign:SlideWipe Direction="Left"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BackwardWipe">
+                    <Setter.Value>
+                        <materialDesign:SlideWipe Direction="Right"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <materialDesign:Transitioner SelectedIndex="0" Name="transitioner" Margin="35,35,35,0" Height="135" VerticalAlignment="Top">
+            <materialDesign:TransitionerSlide >
+                <Grid Name="page1">
+                    <TextBlock TextWrapping="Wrap" Text="产品需要验证" VerticalAlignment="Top" Margin="10,20,0,0" HorizontalAlignment="Left" FontSize="28" />
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,70,10,0"  FontSize="14" HorizontalAlignment="Stretch"
+                       Text= "        您的产品尚未验证，如果您拥有产品密钥，请选择&quot;验证产品&quot;进行激活；您也可以对该产品进行试用，但部分功能将遭到限制。"/>
+                </Grid>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide>
+                <Grid Name="page2">
+                    <TextBlock TextWrapping="Wrap" Text="输入您的产品密钥" VerticalAlignment="Top" Margin="10,20,0,0" HorizontalAlignment="Left" FontSize="28"/>
+                    <TextBox Name="tbSeriesCode" TextWrapping="NoWrap" VerticalAlignment="Top" Margin="20,70,20,0"  FontSize="14" HorizontalAlignment="Stretch" MaxLength="24" Controls:TextBoxHelper.Watermark="Series code here" Controls:TextBoxHelper.ClearTextButton="True"/>
+                </Grid>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide>
+                <Grid Name="page3">
+                    <TextBlock TextWrapping="Wrap" Text="产品注册成功" VerticalAlignment="Top" Margin="10,20,0,0" HorizontalAlignment="Left" FontSize="28"/>
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,70,10,0"  FontSize="14" HorizontalAlignment="Stretch"
+                       Text= "        已应用产品密钥"/>
+                </Grid>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+        <Button Name="btnLeft" Content="验证产品" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="35,0,0,35" Click="BtnLeft_Click"/>
+        <Button Name="btnRight" Content="试用" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,35,35" Click="BtnRight_Click"/>
+    </Grid>
+</Controls:MetroWindow>

@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="ZebraBangumi.NormalSelectBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZebraBangumi"
+             xmlns:mex="clr-namespace:MetroExtras"
+             xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+             xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:exConvert="clr-namespace:MetroExtras.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="200"
+             mex:MetroExtraColor.MainBrush="Violet"
+             mex:MetroExtraColor.LightBrush="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(mex:MetroExtraColor.MainBrush), Converter={x:Static exConvert:ExColorConverter.Light}, ConverterParameter=0.7}">
+    <UIElement.CacheMode>
+        <BitmapCache RenderAtScale="1" EnableClearType="False" SnapsToDevicePixels="False"/>
+    </UIElement.CacheMode>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="BlockControlUseOnly.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="ToggleButton" BasedOn="{StaticResource ExBorderMetroToggleButton}">
+                <Setter Property="Padding" Value="20,4"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="IsChecked" Value="True"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Name="root" Width="200">
+        <Border x:Name="back"
+                Background="Black"
+                Opacity="0.6"/>
+        <ComboBox x:Name="cbTypeSelect" Margin="20,15,20,15" Style="{StaticResource ComboBox}" Height="45" SelectionChanged="CbTypeSelect_SelectionChanged">
+            <ComboBoxItem Content="番剧类型" IsSelected="True"/>
+            <ComboBoxItem Content="放送方式"/>
+        </ComboBox>
+        <Rectangle Style="{StaticResource StrokeLine}" Margin="15,70,15,15"/>
+        <StackPanel Name="stkItems" Orientation="Vertical"
+                    Margin="15,80,15,15">
+        </StackPanel>
+        <Rectangle Name="lockBlock" Fill="White" Opacity="0" Visibility="Hidden"/>
+    </Grid>
+</UserControl>
