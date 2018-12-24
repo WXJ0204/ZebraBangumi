@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FolderPacker;
 
 namespace ZebraBangumi
 {
-    public class ImageCache
+    public class ImageCache : IDisposable
     {
         private readonly static String cachePicPath = @"images\";
 
@@ -42,18 +44,34 @@ namespace ZebraBangumi
 
         public ImageCache()
         {
-            foreach(var ye in years)
+            DirectoryInfo info = new DirectoryInfo(cachePicPath);
+            info.Create();
+            info.Attributes = FileAttributes.Hidden;
+            using (FileStream fs = new FileStream("wc.mgs", FileMode.Open))
             {
-                foreach(var se in seasons)
+                FolderPacker.FolderPacker packer = new FolderPacker.FolderPacker();
+                packer.UnPackFolder(info.Parent.FullName, fs);
+            }
+            foreach (var ye in years)
+            {
+                foreach (var se in seasons)
                 {
                     String fn = String.Format("{0}{1}{2}.png", cachePicPath, ye.Key, se.Key);
                     FileInfo fi = new FileInfo(fn);
-                    if(fi.Exists)
+                    if (fi.Exists)
                     {
-                        imageSources[ye.Value, se.Value] = new BitmapImage(new Uri(fi.FullName));
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.UriSource = new Uri(fi.FullName);
+                        bitmapImage.EndInit();
+                        imageSources[ye.Value, se.Value] = bitmapImage;
+
                     }
                 }
             }
+            DirectoryInfo directoryInfo = new DirectoryInfo(cachePicPath);
+            directoryInfo.Delete(true);
         }
 
         public ImageSource GetWordCloud(String year, String season)
@@ -82,22 +100,22 @@ namespace ZebraBangumi
         public void SaveAllToPDF(FileInfo fileInfo, ProgressListener progressListener = null)
         {
             if (bitmaps.Count == 0) return;
-            float width = Bitmaps.Max((bs) => (float)bs.Width)+60;
-            float height = Bitmaps.Max((bs) => (float)bs.Height)+60;
-            Document document = new Document(new Rectangle(width, height),30,30,30,30);
+            float width = Bitmaps.Max((bs) => (float)bs.Width) + 60;
+            float height = Bitmaps.Max((bs) => (float)bs.Height) + 60;
+            Document document = new Document(new Rectangle(width, height), 30, 30, 30, 30);
 
             using (FileStream fileStream = fileInfo.Create())
             {
                 using (PdfWriter writer = PdfWriter.GetInstance(document, fileStream))
                 {
                     document.Open();
-                    
+
                     document.AddTitle(fileInfo.Name);
-                    document.AddCreator("ZebraBangumi "+Properties.Settings.Default.SoftwareVersion);
+                    document.AddCreator("ZebraBangumi " + Properties.Settings.Default.SoftwareVersion);
 
                     int count = bitmaps.Count;
                     int i = 0;
-                    foreach(BitmapSource bitmap in Bitmaps)
+                    foreach (BitmapSource bitmap in Bitmaps)
                     {
                         document.NewPage();
                         BitmapEncoder encoder = new PngBitmapEncoder();
@@ -114,7 +132,7 @@ namespace ZebraBangumi
                         posX = (width - (float)bitmap.Width) / 2;
                         posY = (height - (float)bitmap.Height) / 2;
                         writer.DirectContent.AddImage(pdfImage, bitmap.Width, 0, 0, bitmap.Height, posX, posY);
-                        if(progressListener!=null)
+                        if (progressListener != null)
                         {
                             progressListener.Value = ((double)++i) / count * 100;
                         }
@@ -139,5 +157,9 @@ namespace ZebraBangumi
             return index;
         }
 
+        public void Dispose()
+        {
+            Directory.Delete(cachePicPath);
+        }
     }
 }

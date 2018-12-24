@@ -142,8 +142,10 @@
     </ApplicationDefinition>
     <Compile Include="ChineseValueTranslater.cs" />
     <Compile Include="DBOpration.cs" />
+    <Compile Include="FolderPacker\FolderPacker.cs" />
     <Compile Include="ImageCache.cs" />
     <Compile Include="ProgressListener.cs" />
+    <Compile Include="FolderPacker\SimpleFileInfo.cs" />
     <Compile Include="UI\TipDialog.xaml.cs">
       <DependentUpon>TipDialog.xaml</DependentUpon>
     </Compile>
