@@ -60,7 +60,7 @@ namespace ZebraBangumi.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Alpha 0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Alpha 0.0.2")]
         public string SoftwareVersion {
             get {
                 return ((string)(this["SoftwareVersion"]));
@@ -81,7 +81,7 @@ namespace ZebraBangumi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("@Desktop")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LastSavePath {
             get {
                 return ((string)(this["LastSavePath"]));

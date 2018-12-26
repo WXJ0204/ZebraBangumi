@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Projects\visual studio\ZebraBangumi\ZebraBangumi\obj\Debug\
+E:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\obj\Debug\
 ZebraBangumi
 none
 false
 DEBUG;TRACE
-E:\Projects\visual studio\ZebraBangumi\ZebraBangumi\UI\App.xaml
+E:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\App.xaml
 221657980541
 
-411790349446
-27-658399504
+432131283913
+272066922245
 Properties\DesignTimeResources.xaml;UI\TipDialog.xaml;UI\MetroExtra\Thumbnail.xaml;UI\Controls\AddableSelectBlock.xaml;UI\Controls\BlockControlUseOnly.xaml;UI\Controls\NormalSelectBlock.xaml;UI\Controls\PeriodSelectBlock.xaml;UI\Controls\TimeSelectBlock.xaml;UI\MetroExtra\MetroExtraButton.xaml;UI\MainWindow.xaml;UI\LoadingWindow.xaml;UI\MetroExtra\MetroExtraComboBox.xaml;UI\MetroExtra\SearchBox.xaml;UI\SavingWaitingWindows.xaml;UI\SeriesInputWindow.xaml;UI\Transitions\Slide1.xaml;UI\Transitions\Slide2.xaml;UI\Transitions\Slide3.xaml;UI\Transitions\Slide4.xaml;UI\Transitions\Slide5.xaml;UI\Transitions\Slide6.xaml;UI\Transitions\TransitionsUseOnly.xaml;
 
-False
+True
 
