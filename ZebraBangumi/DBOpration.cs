@@ -541,6 +541,7 @@ namespace ZebraBangumi
             int startSeasonth = Array.IndexOf(this.Season, startSeason);
             int endSeasonth = Array.IndexOf(this.Season, endSeason);
             if (startYearth * 10 + startSeasonth > endYearth * 10 + endSeasonth) return pointList;
+
             else if (startSeason.Equals("全部") && endSeason.Equals("全部"))
             {
                 for (int ye = startYearth; ye <= endYearth; ye++)
@@ -584,8 +585,12 @@ namespace ZebraBangumi
                         }
                         else
                            s = 0;
-                            
-                            for ( int i = s; i < 4; i++)
+                        int end = 4;
+                        if ((startYearth == endYearth)&& (startSeasonth == endSeasonth)){
+                            end = s + 1;
+                        }
+
+                            for ( int i = s; i < end; i++)
                             {
                                 int count = 0;
 
