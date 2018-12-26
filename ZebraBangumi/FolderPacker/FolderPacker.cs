@@ -17,7 +17,7 @@ namespace FolderPacker
             if (!targetStream.CanWrite) return false;
             DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
             String parent = directoryInfo.Parent.FullName + @"\";
-            getFiles(directoryInfo, directoryInfo.Name);
+            GetFiles(directoryInfo, directoryInfo.Name);
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(targetStream, allFiles);
             foreach (SimpleFileInfo sfi in allFiles)
@@ -32,7 +32,7 @@ namespace FolderPacker
             return true;
         }
 
-        private void getFiles(DirectoryInfo thisDirectory, String dir)
+        private void GetFiles(DirectoryInfo thisDirectory, String dir)
         {
             foreach(FileInfo fi in thisDirectory.GetFiles())
             {
@@ -40,7 +40,7 @@ namespace FolderPacker
             }
             foreach(DirectoryInfo di in thisDirectory.GetDirectories())
             {
-                getFiles(di, dir + @"\" + di.Name);
+                GetFiles(di, dir + @"\" + di.Name);
             }
         }
 
