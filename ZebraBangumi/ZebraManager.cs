@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace ZebraBangumi
         {
             ReCheckAccess();
             DBOprator = new DBOpration();
+            DateTime dt = new FileInfo(dataBaseSavePath).LastWriteTime;
+            Properties.Settings.Default.DatabaseVersion = String.Format("v{0}.{1}.{2}", dt.Year, dt.Month, dt.Day);
         }
         public static ZebraManager Instance
         {
