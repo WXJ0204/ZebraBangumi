@@ -91,7 +91,7 @@ namespace ZebraBangumi
         private void RefreshComboBoxItems()
         {
             String sy = StartYear, ss = StartSeason, ey = EndYear, es = EndSeason;
-            Visibility syf = Visibility.Collapsed, ssf = Visibility.Collapsed, eyf = Visibility.Visible, esf = Visibility.Visible;
+            Visibility syf = Visibility.Collapsed, ssf = Visibility.Visible, eyf = Visibility.Visible, esf = Visibility.Collapsed;
             
             int i = 0;
             foreach(String yn in yearsName)
@@ -115,14 +115,14 @@ namespace ZebraBangumi
                 {
                     if (es == sn)
                     {
-                        ssf = Visibility.Visible;
+                        ssf = Visibility.Collapsed;
                     }
                     cbiStartSeasons[i].Visibility = ssf;
                     cbiEndSeasons[i].Visibility = esf;
                     i++;
                     if (ss == sn)
                     {
-                        esf = Visibility.Collapsed;
+                        esf = Visibility.Visible;
                     }
                 }
             }

@@ -33,8 +33,10 @@ namespace ZebraBangumi
             InitializeComponent();
             savePngFileDialog.DefaultExt = ".png";
             savePngFileDialog.Filter = "PNG格式图片 (.png)|*.png";
+            savePngFileDialog.FileName = "ZebraPic.png";
             savePdfFileDialog.DefaultExt = ".pdf";
             savePdfFileDialog.Filter = "PDF文档 (.pdf)|*.pdf";
+            savePdfFileDialog.FileName = "ZebraForm.pdf";
         }
 
         public void TurnToThisPage()

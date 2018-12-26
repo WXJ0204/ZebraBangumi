@@ -35,14 +35,14 @@ namespace ZebraBangumi
                 tbTitle.Text = "数据加载";
                 Thread thread = new Thread(() =>
                 {
-                try
-                {
-                    ZebraManager manager = ZebraManager.Instance;
-                }
-                catch (Exception e)
-                {
-                    new TipDialog("重大错误", "文件格式可能损坏：" + e.Message).ShowDialog();
-                    Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
+                    try
+                    {
+                        ZebraManager manager = ZebraManager.Instance;
+                    }
+                    catch (Exception e)
+                    {
+                        new TipDialog("重大错误", "文件格式可能损坏：" + e.Message).ShowDialog();
+                        Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
                     }
                     this.Dispatcher.Invoke(() =>
                     {

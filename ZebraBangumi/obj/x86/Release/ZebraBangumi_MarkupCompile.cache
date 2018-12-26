@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Projects\visual studio\ZebraBangumi\ZebraBangumi\obj\x86\Release\
+E:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\obj\x86\Release\
 ZebraBangumi
 none
 false
 TRACE
-E:\Projects\visual studio\ZebraBangumi\ZebraBangumi\UI\App.xaml
-18-1603348264
+E:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\App.xaml
+221657980541
 
-27-364782180
-26-177486006
-Properties\DesignTimeResources.xaml;UI\Controls\AddableSelectBlock.xaml;UI\Controls\BlockControlUseOnly.xaml;UI\Controls\NormalSelectBlock.xaml;UI\Controls\PeriodSelectBlock.xaml;UI\Controls\TimeSelectBlock.xaml;UI\MetroExtra\MetroExtraButton.xaml;UI\MainWindow.xaml;UI\LoadingWindow.xaml;UI\MetroExtra\MetroExtraComboBox.xaml;UI\MetroExtra\SearchBox.xaml;UI\Transitions\Slide1.xaml;UI\Transitions\Slide2.xaml;UI\Transitions\Slide3.xaml;UI\Transitions\Slide4.xaml;UI\Transitions\Slide5.xaml;UI\Transitions\Slide6.xaml;UI\Transitions\TransitionsUseOnly.xaml;
+39-856121216
+272066922245
+Properties\DesignTimeResources.xaml;UI\TipDialog.xaml;UI\MetroExtra\Thumbnail.xaml;UI\Controls\AddableSelectBlock.xaml;UI\Controls\BlockControlUseOnly.xaml;UI\Controls\NormalSelectBlock.xaml;UI\Controls\PeriodSelectBlock.xaml;UI\Controls\TimeSelectBlock.xaml;UI\MetroExtra\MetroExtraButton.xaml;UI\MainWindow.xaml;UI\LoadingWindow.xaml;UI\MetroExtra\MetroExtraComboBox.xaml;UI\MetroExtra\SearchBox.xaml;UI\SavingWaitingWindows.xaml;UI\SeriesInputWindow.xaml;UI\Transitions\Slide1.xaml;UI\Transitions\Slide2.xaml;UI\Transitions\Slide3.xaml;UI\Transitions\Slide4.xaml;UI\Transitions\Slide5.xaml;UI\Transitions\Slide6.xaml;UI\Transitions\TransitionsUseOnly.xaml;
 
 False
 

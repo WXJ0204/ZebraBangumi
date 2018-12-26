@@ -1,30 +1,4 @@
-<<<<<<< HEAD
 ﻿
-FD:\project\ZebraBangumi\ZebraBangumi\UI\App.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\Properties\DesignTimeResources.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\TipDialog.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\MetroExtra\Thumbnail.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Controls\AddableSelectBlock.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Controls\BlockControlUseOnly.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Controls\NormalSelectBlock.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Controls\PeriodSelectBlock.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Controls\TimeSelectBlock.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\MetroExtra\MetroExtraButton.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\MainWindow.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\LoadingWindow.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\MetroExtra\MetroExtraComboBox.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\MetroExtra\SearchBox.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\SavingWaitingWindows.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\SeriesInputWindow.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide1.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide2.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide3.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide4.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide5.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide6.xaml;;
-FD:\project\ZebraBangumi\ZebraBangumi\UI\Transitions\TransitionsUseOnly.xaml;;
-=======
-﻿E:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FE:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\App.xaml;;
 FE:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\Properties\DesignTimeResources.xaml;;
 FE:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\TipDialog.xaml;;
@@ -48,5 +22,4 @@ FE:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide4.xaml;;
 FE:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide5.xaml;;
 FE:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\Transitions\Slide6.xaml;;
 FE:\Projects\Git_Programs\ZebraBangumi\ZebraBangumi\UI\Transitions\TransitionsUseOnly.xaml;;
->>>>>>> d6dd7305a4be3cbfaf98e69d63cbc9384d651326
 

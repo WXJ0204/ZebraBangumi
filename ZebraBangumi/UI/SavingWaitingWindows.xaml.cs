@@ -41,11 +41,15 @@ namespace ZebraBangumi
         private void SetProgressBarValue(Double value)
         {
             double times = Properties.Settings.Default.PictureSaveMagnification;
-            double time = (value - pbSaving.Value) * 2 * times * times;
+            double time = (value - pbSaving.Value) * times * times;
             DoubleAnimation doubleAnimation = new DoubleAnimation(value, new Duration(TimeSpan.FromMilliseconds(time)));
             Storyboard sb = new Storyboard();
             sb.Children.Add(doubleAnimation);
-            sb.Completed += (sender, e) => { if (value >= 100) this.Close(); };
+            if (value >= 100)
+            {
+                doubleAnimation.Duration = TimeSpan.FromMilliseconds(100);
+                sb.Completed += (sender, e) => { this.Close(); };
+            }
             Storyboard.SetTarget(sb, pbSaving);
             Storyboard.SetTargetProperty(sb, new PropertyPath(ProgressBar.ValueProperty));
             sb.Begin();
